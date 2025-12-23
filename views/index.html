@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrant Information</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Registrant Information</h2>
+
+    <form action="/register" method="POST">
+
+        <label>Company:</label>
+        <input type="text" name="company">
+
+        <label>First Name <span>*</span></label>
+        <input type="text" name="firstName">
+
+        <label>Last Name <span>*</span></label>
+        <input type="text" name="lastName">
+
+        <label>Email:</label>
+        <input type="text" name="email">
+
+        <label>Phone:</label>
+        <input type="text" name="phone">
+
+        <label>Address <span>*</span></label>
+        <input type="text" name="address">
+
+        <label>City <span>*</span></label>
+        <input type="text" name="city">
+
+        <label>State <span>*</span></label>
+        <select name="state">
+            <option value="">-- Select State --</option>
+            <option value="ME">Maine (US)</option>
+            <option value="CA">California</option>
+            <option value="NY">New York</option>
+        </select>
+
+        <button type="submit">Submit My Registration</button>
+    </form>
+</div>
+
+</body>
+</html>
