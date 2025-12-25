@@ -26,18 +26,50 @@ app.post("/register", (req, res) => {
 
     let errors = [];
 
-    if (!firstName) errors.push("First Name is required");
-    if (!lastName) errors.push("Last Name is required");
-    if (!address) errors.push("Address is required");
-    if (!city) errors.push("City is required");
-    if (!state) errors.push("State is required");
-
-    if (email && !email.includes("@")) {
-        errors.push("Invalid email format");
+    // First Name validation (Required) - Equivalence Partitioning
+    if (!firstName || firstName.trim() === "") {
+        errors.push("First Name is required");
+    } else if (!/^[a-zA-Z]+$/.test(firstName)) {
+        errors.push("First Name must contain only alphabetic characters");
+    } else if (firstName.length > 30) {
+        errors.push("First Name must not exceed 30 characters");
     }
 
-    if (phone && !/^[0-9+]+$/.test(phone)) {
-        errors.push("Invalid phone number");
+    // Last Name validation (Required)
+    if (!lastName || lastName.trim() === "") {
+        errors.push("Last Name is required");
+    }
+
+    // Email validation (Optional) - Equivalence Partitioning
+    if (email && email.trim() !== "") {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            errors.push("Invalid email format");
+        }
+    }
+
+    // Phone validation (Optional) - Numeric only
+    if (phone && phone.trim() !== "") {
+        if (!/^[0-9+]+$/.test(phone)) {
+            errors.push("Phone must contain only numeric characters");
+        }
+    }
+
+    // Address validation (Required)
+    if (!address || address.trim() === "") {
+        errors.push("Address is required");
+    }
+
+    // City validation (Required) - Alphabetic only
+    if (!city || city.trim() === "") {
+        errors.push("City is required");
+    } else if (!/^[a-zA-Z\s]+$/.test(city)) {
+        errors.push("City must contain only alphabetic characters");
+    }
+
+    // State validation (Required) - Must be selected
+    if (!state || state.trim() === "") {
+        errors.push("State is required");
     }
 
     if (errors.length > 0) {
